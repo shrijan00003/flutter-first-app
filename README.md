@@ -1,152 +1,110 @@
-#day1 installation
+#day3 split and manage files
 
-pubspec.yaml will have all of our packages and installation.
+we have splited our code to different stateless and stateful widgets files so that our code will look much nicer and executable.
 
-main.dart file is imp file and it doesnot have to renamed !!!!
+we have created two more files `producsts.dart`, and `product_manager.dart` as the name suggest products.dart is the stateless widget that is responsible for getting products from parent and display in the screen. And product_manager.dart is the statefullwidget as that will have state and it will update the state as button is clicked .
 
-we will add more content on this branch
+Finally we have added both of them with import function so this is how our 3 files look like now.
 
-main.dart file can be shown as :
+_main.dart_
 
 ```
 import 'package:flutter/material.dart';
 
+import './product_manager.dart';
+
 void main() {
-  //special function
-  runApp(MyApp());
+ //special function
+ runApp(MyApp());
 }
 
 // void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('EasyList'),
-        ),
-      ),
-    );
-  }
+ @override
+ Widget build(BuildContext context) {
+   // TODO: implement build
+   return MaterialApp(
+     home: Scaffold(
+       appBar: AppBar(
+         title: Text('EasyList'),
+       ),
+       body: ProductManager(),
+     ),
+   );
+ }
 }
 
 ```
 
-we can replace the main function with the fat=>arrow function as in comment
-
-The annotation @override will tell the flutter that we are overriding the build method that is already in the StatelessWidget class. It can work without annotation as well.
-##Notes
-
-1. Whatever widget we will add on the app we will ended with flutter built-in widget at the last as they can be converted to the native code.
-
-### lets add more to app
-
-we have added body argument for the Scaffold widget just like appBar widget
-example is:
+_products.dart_
 
 ```
- body: Card(
-          child: Column(
-            children: <Widget>[
-              Image.asset('assets/food.jpeg'),
-              Text('Food paradise'),
-            ],
-          ),
-        ),
-```
+import 'package:flutter/material.dart';
 
-in body argument we are having another widget called Card and this will also have widgets listed inside. Column widget will have children argument that will have multiple widgets listed in array.
-
-we can see another type of constructor used with Image widget with . operator. we can always can check tool tips to have more suggestions.
-
-### tool tips
-
-`clrt + space` will give us the suggestions.
-
-### adding assets to the flutter
-
-create a new folder called `assets` on our root folder
-
-download some images for test
-
-Edit the pubspec.yaml file
+class Products extends StatelessWidget {
+ final List<String> products;
+ Products(this.products);
+ @override
+ Widget build(BuildContext context) {
+   return Column(
+     children: products
+         .map(
+           (element) => Card(
+                 child: Column(
+                   children: <Widget>[
+                     Image.asset('assets/food.jpeg'),
+                     Text(element),
+                   ],
+                 ),
+               ),
+         )
+         .toList(),
+   );
+ }
+}
 
 ```
- # To add assets to your application, add an assets section, like this:
-  assets:
-    - assets/food.jpeg
-```
 
-### widgets catalog
-
-widgets catalog will have all ui related widgets and that is where we can find all widgets to be added to our app
-
-### editing body
+and fillay _product_manager.dart_ file
 
 ```
- body: Column(
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.all(10.0),
-                child: RaisedButton(
-                  onPressed: () {},
-                  child: Text('Add Product'),
-                ),
-              ),
-              Card(
-                child: Column(
-                  children: <Widget>[
-                    Image.asset('assets/food.jpeg'),
-                    Text('Food paradise'),
-                  ],
-                ),
-              ),
-            ],
-          )),
+import 'package:flutter/material.dart';
+
+import './products.dart';
+
+class ProductManager extends StatefulWidget {
+ @override
+ State<StatefulWidget> createState() {
+   // TODO: implement createState
+   return _ProductManagerState();
+ }
+}
+
+class _ProductManagerState extends State<ProductManager> {
+ List<String> _products = ['Food Tester'];
+ @override
+ Widget build(BuildContext context) {
+   // TODO: implement build
+   return Column(
+     children: <Widget>[
+       Container(
+         margin: EdgeInsets.all(10.0),
+         child: RaisedButton(
+           onPressed: () {
+             setState(() {
+               _products.add(('Avanced Food Tester'));
+             });
+           },
+           child: Text('Add Products'),
+         ),
+       ),
+       Products(_products),
+     ],
+   );
+ }
+}
+
 ```
 
-we have added Column widget and container in children of column and we have raisedButton as its child with onPressed and child arguemnts.
-
-#### adding functionality to the button
-
-create a new card on button pressed
-
-#### quick review to the body argument before spliting it in another file
-
-```
-body: Column(
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.all(10.0),
-                child: RaisedButton(
-                  onPressed: () {
-                    setState(() {
-                      _products.add(('Avanced Food Tester'));
-                    });
-                  },
-                  child: Text('Add Products'),
-                ),
-              ),
-              Column(
-                children: _products
-                    .map(
-                      (element) => Card(
-                            child: Column(
-                              children: <Widget>[
-                                Image.asset('assets/food.jpeg'),
-                                Text(element),
-                              ],
-                            ),
-                          ),
-                    )
-                    .toList(),
-              )
-            ],
-          )),
-```
-
-Description about this code :
-
-we can not directly add \_products as it is the iterable with map with the children property of column so that we have to make another nested column inside it and never forget to convert it to List after the end of map parenthesis.
+Note: the tutorial is covered upto 2:19 we will continue this whenever we will have time further
