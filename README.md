@@ -129,4 +129,14 @@ we can pass the named argument and recieve like in javascript destructuring with
 
 we also have positioned argument which can be use full for very few paramets.
 
-time is 2:45:01 on tutorial (need to edit this later)
+### optional arguments
+
+optional parameter must be const (This is the special feature of the dart)
+
+optional parameter must be also enclosed by the [] square bracket as we know that named arguments are enclosed by { } curly braces.
+
+we can use optional arguments in the stateless arguments and if we have forgot to pass the arguments to the stateless widget that app will not get crashed.
+
+### for learning more about the dart language we can follow the link
+
+https://www.dartlang.org/
