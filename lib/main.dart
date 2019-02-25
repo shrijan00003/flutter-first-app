@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'product_manager.dart';
 
 import './text_control.dart';
 
@@ -12,8 +13,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         home: Scaffold(
             appBar: AppBar(
-              title: Text('Assignment 1'),
+              title: Text('Product Manager'),
             ),
-            body: TextControl()));
+            body: ProductManager()));
   }
 }

@@ -1,9 +1,5 @@
-#day 5 assignment
+#day 6 passing function as argument
 
-what is the assignment then ??
+here in the product manager we define the function to add the product and then we have passed that to the product_control widget with the button rendered there and we have invoked a onclick function then after.
 
-1. create a new flutter app in this project , and output an appbar and some text below it
-
-2. add a button which changes the text (to any other text of your choice)
-
-3. Split the widgets into three widgets: App, Text Control and Text
+Thats it. for now.........
